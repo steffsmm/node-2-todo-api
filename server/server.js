@@ -2,6 +2,7 @@ var express    = require('express')
 var bodyParser = require('body-parser')
 var app = express()
 
+//node-todo-api-database
 // parse application/x-www-form-urlencoded
 //app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
@@ -15,6 +16,8 @@ var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 const {ObjectID} = require('mongodb')
 
+
+const port = process.env.PORT || 3000;
 //app.use(require('connect').bodyParser.json());
 
 app.post('/todos',(req, res)=>{
@@ -52,8 +55,8 @@ app.get("/todos/:id",(req,res)=>{
 
 })
 
-app.listen(3000, ()=>{
-  console.log('Started on port 3000');
+app.listen(port, ()=>{
+  console.log(`Started on port ${port}`);
 })
 
 module.exports = {app};
@@ -104,3 +107,5 @@ module.exports = {app};
 // },(e)=>{
 //   console.log("Unable to save user");
 // })
+
+//mongodb://Steffsmm:Smm1694@ds127065.mlab.com:27065/node-todo-api-database
