@@ -21,7 +21,7 @@ beforeEach((done)=>{
     return Todo.insertMany(todos);
   })
   .then(()=>done());
-})
+});
 
 describe('POST /todos', () => {
   it('should create a new todo', (done) => {
@@ -105,3 +105,33 @@ describe("GET /todo/:id",()=>{
   });
 
 })
+
+
+describe('DELETE /todos/:id',()=>{
+  it('shoudl remove a todo',(done)=>{
+    var hexID = todos[1]._id.toHexString()
+    request(app)
+    .delete(`/todos/${hexID}`)
+    .expect(200)
+    .expect((res)=>{
+      expect(res.body.todo._id).toBe(hexID)
+    }).end((err,res)=>{
+      if(err){return done(err)}
+      Todo.findById(hexID).then((todo)=>{
+        expect(todo).toNotExist();
+        done()
+      }).catch((e)=>done(e))
+
+    }
+    )
+
+  });
+  it('should return 404 if not found',(done)=>{
+    var newID = new ObjectID().toHexString();
+    request(app)
+    .delete(`/todos/${newID}`)
+    .expect(404).end(done());
+  });
+
+
+});
