@@ -1,3 +1,4 @@
+require('./config/config');
 
 const _ = require('lodash');
 const express    = require('express')
@@ -21,6 +22,7 @@ const {ObjectID} = require('mongodb')
 
 const port = process.env.PORT || 3000;
 //app.use(require('connect').bodyParser.json());
+//console.log(port);
 
 app.post('/todos',(req, res)=>{
   //console.log(req.body);
@@ -90,6 +92,19 @@ app.patch("/Todos/:id",(req,res)=>{
   }).catch((e)=>res.status(400).send())
 
 })
+
+
+app.post('/users',(req, res)=>{
+  var body = _.pick(req.body,["email","password"]);
+  var user = new User(body);
+  console.log(user);
+  user.save().then((doc)=>{
+    res.send(doc);
+  },(e)=>{
+    res.status(400).send(e);
+  })
+})
+
 
 app.listen(port, ()=>{
   console.log(`Started on port ${port}`);

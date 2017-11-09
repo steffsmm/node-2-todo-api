@@ -6,6 +6,8 @@ const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 const {mongose} = require('./../db/mongoose');
 
+
+
 const todos = [{
   _id: new ObjectID(),
   text:"First todo"
@@ -102,7 +104,7 @@ describe("GET /todo/:id",()=>{
   it("should return 404 if non-object ids",(done)=>{
     request(app)
     .get(`/todos/123`)
-    .expect(404).end(done());
+    .expect(404).end(done);
 
   });
 
@@ -132,7 +134,7 @@ describe('DELETE /todos/:id',()=>{
     var newID = new ObjectID().toHexString();
     request(app)
     .delete(`/todos/${newID}`)
-    .expect(404).end(done());
+    .expect(404).end(done)
   });
 
 
