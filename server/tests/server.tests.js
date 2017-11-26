@@ -5,27 +5,12 @@ const {ObjectID} = require('mongodb');
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 const {mongose} = require('./../db/mongoose');
+const {todos, populateTodos} = require('./seed/seed');
 
 
 
-const todos = [{
-  _id: new ObjectID(),
-  text:"First todo"
-},{
-  _id: new ObjectID(),
-  text:"Second todo",
-  completed: true,
-  completedAt: 1354
-}];
 
-
-beforeEach((done)=>{
-  Todo.remove({})
-  .then(()=>{
-    return Todo.insertMany(todos);
-  })
-  .then(()=>done());
-});
+beforeEach(populateTodos);
 
 describe('POST /todos', () => {
   it('should create a new todo', (done) => {
@@ -97,7 +82,7 @@ describe("GET /todo/:id",()=>{
       var newID = new ObjectID().toHexString()
       request(app)
       .get(`/todos/${newID}`)
-      .expect(404).end(done());
+      .expect(404).end(done);
 
     });
 

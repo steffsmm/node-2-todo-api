@@ -18,8 +18,8 @@ app.use(bodyParser.json())
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
-const {ObjectID} = require('mongodb')
-var {authenticate} = require("./middlewhere/authenticate")
+const {ObjectID} = require('mongodb');
+var {authenticate} = require("./middlewhere/authenticate");
 
 const port = process.env.PORT || 3000;
 //app.use(require('connect').bodyParser.json());
@@ -110,12 +110,13 @@ app.post('/users',(req, res)=>{
 
 
 
-app.get("/users/me", authenticate, (req,res)=>{
+app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
-})
+});
+
 app.listen(port, ()=>{
   console.log(`Started on port ${port}`);
-})
+});
 
 module.exports = {app};
 
