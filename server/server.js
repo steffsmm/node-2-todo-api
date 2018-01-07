@@ -13,6 +13,11 @@ const app = express()
 // parse application/json
 //app.use(bodyParser.raw({ type: 'text/xml' }));
 
+// app.get('*', (req, res) =>{
+//   res.sendFile(path.resolve(__dirname, 'index.html'));
+// });
+
+
 app.use(bodyParser.json())
 
 var {mongoose} = require('./db/mongoose');
