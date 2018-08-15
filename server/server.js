@@ -204,5 +204,4 @@ module.exports = {app};
 //   console.log("Unable to save user");
 // })
 
-//mongodb://Steffsmm:Smm1694@ds127065.mlab.com:27065/node-todo-api-database
 //"test": "nodemon --exec \"mocha server/**/*.tests.js\""
